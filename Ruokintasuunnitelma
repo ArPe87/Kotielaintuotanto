@@ -1,0 +1,1816 @@
+class Ruokintasuunnitelma
+{
+    static void Main()
+    {
+        // Kysytään eläinryhmä
+        Console.WriteLine("Valitse eläinryhmä (Valitse väliltä 1-3):");
+        Console.WriteLine("1. nauta");
+        Console.WriteLine("2. sika");
+        Console.WriteLine("3. siipikarja");
+        int eläinryhmä = int.Parse(Console.ReadLine());
+
+        switch (eläinryhmä)
+        {
+            case 1:
+                // Naudan tyyppivalinta
+                Console.WriteLine("Valitse nautatyyppi (Valitse väliltä 1-5):");
+                Console.WriteLine("1. lehmä");
+                Console.WriteLine("2. sonni");
+                Console.WriteLine("3. hieho");
+                Console.WriteLine("4. härkä");
+                Console.WriteLine("5. vasikka");
+                int naudanTyyppi = int.Parse(Console.ReadLine());
+
+                switch (naudanTyyppi)
+                {
+                    case 1:
+                        LehmänRuokintasuunnitelma();
+                        break;
+                    case 2:
+                        SonninRuokintasuunnitelma();
+                        break;
+                    case 3:
+                        HiehonRuokintasuunnitelma();
+                        break;
+                    case 4:
+                        HäränRuokintasuunnitelma();
+                        break;
+                    case 5:
+                        VasikanRuokintasuunnitelma();
+                        break;
+                    default:
+                        Console.WriteLine("Virheellinen valinta. Valitse numero väliltä 1-5.");
+                        break;
+                }
+                break;
+
+            case 2:
+                // Sian tyyppivalinta
+                Console.WriteLine("Valitse sikatyyppi (Valitse väliltä 1-5):");
+                Console.WriteLine("1. emakko");
+                Console.WriteLine("2. karju");
+                Console.WriteLine("3. porsimaton naarassika");
+                Console.WriteLine("4. kastroitu urossika");
+                Console.WriteLine("5. porsas");
+                int sianTyyppi = int.Parse(Console.ReadLine());
+
+                switch (sianTyyppi)
+                {
+                    case 1:
+                        EmakonRuokintasuunnitelma();
+                        break;
+                    case 2:
+                        KarjunRuokintasuunnitelma();
+                        break;
+                    case 3:
+                        PorsimattomanNaarassianRuokintasuunnitelma();
+                        break;
+                    case 4:
+                        KastroidunUrossianRuokintasuunnitelma();
+                        break;
+                    case 5:
+                        PorsaanRuokintasuunnitelma();
+                        break;
+                    default:
+                        Console.WriteLine("Virheellinen valinta. Valitse numero väliltä 1-5.");
+                        break;
+                }
+                break;
+
+            case 3:
+                // Siipikarjan tyyppivalinta
+                Console.WriteLine("Valitse siipikarjatyyppi (Valitse väliltä 1-3):");
+                Console.WriteLine("1. kana");
+                Console.WriteLine("2. kukko");
+                Console.WriteLine("3. poikanen");
+                int siipikarjanTyyppi = int.Parse(Console.ReadLine());
+
+                switch (siipikarjanTyyppi)
+                {
+                    case 1:
+                        KananRuokintasuunnitelma();
+                        break;
+                    case 2:
+                        KukonRuokintasuunnitelma();
+                        break;
+                    case 3:
+                        PoikasenRuokintasuunnitelma();
+                        break;
+                    default:
+                        Console.WriteLine("Virheellinen valinta. Valitse numero väliltä 1-3.");
+                        break;
+                }
+                break;
+
+            default:
+                Console.WriteLine("Virheellinen valinta.");
+                break;
+        }
+
+        Console.WriteLine("\nPaina Enter sulkeaksesi ohjelman.");
+        Console.ReadLine();
+    }
+
+    // Nautojen ruokintasuunnitelmat
+
+    // Lehmän ruokintasuunnitelma
+    static void LehmänRuokintasuunnitelma()
+    {
+        // Pyydetään käyttäjältä tarvittavat tiedot lypsylehmästä
+        Console.Write("Syötä lypsylehmän elopaino (kg): ");
+        double elopaino = double.Parse(Console.ReadLine());
+
+        Console.Write("Syötä päivittäin tuotetun maidon määrä (kg): ");
+        double maidonMaara = double.Parse(Console.ReadLine());
+
+        Console.Write("Syötä maidon rasvapitoisuus (%): ");
+        double maidonRasva = double.Parse(Console.ReadLine()) / 100;
+
+        // Syötetään nurmirehun tiedot
+        Console.WriteLine("\nOnko käytössä nurmirehua? (k/e)");
+        bool onkoNurmirehua = Console.ReadLine().ToLower() == "k";
+
+        double nurmirehuEnergia = 0, nurmirehuKuivaAine = 0, nurmirehuProsentti = 0;
+        if (onkoNurmirehua)
+        {
+            Console.Write("Syötä nurmirehun energia-arvo (MJ/kg KA): ");
+            nurmirehuEnergia = double.Parse(Console.ReadLine());
+
+            Console.Write("Syötä nurmirehun kuiva-ainepitoisuus (%): ");
+            nurmirehuKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            Console.Write("Syötä nurmirehun osuus (%) ruokinnassa: ");
+            nurmirehuProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Syötetään viljarehun tiedot
+        Console.WriteLine("\nOnko käytössä viljarehua? (k/e)");
+        bool onkoViljarehua = Console.ReadLine().ToLower() == "k";
+
+        double viljarehuEnergia = 0, viljarehuKuivaAine = 0, viljarehuProsentti = 0;
+        if (onkoViljarehua)
+        {
+            Console.Write("Syötä viljarehun energia-arvo (MJ/kg KA): ");
+            viljarehuEnergia = double.Parse(Console.ReadLine());
+
+            Console.Write("Syötä viljarehun kuiva-ainepitoisuus (%): ");
+            viljarehuKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            Console.Write("Syötä viljarehun osuus (%) ruokinnassa: ");
+            viljarehuProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Kysytään, onko käytössä rypsirouhetta/tiivistettä
+        Console.WriteLine("\nOnko käytössä rypsirouhetta/tiivistettä? (k/e)");
+        bool onkoRypsirouhetta = Console.ReadLine().ToLower() == "k";
+
+        double rypsirouheEnergia = 0, rypsirouheKuivaAine = 0, rypsirouheProsentti = 0;
+        if (onkoRypsirouhetta)
+        {
+            Console.Write("Syötä rypsirouheen/tiivisteen energia-arvo (MJ/kg KA): ");
+            rypsirouheEnergia = double.Parse(Console.ReadLine());
+
+            Console.Write("Syötä rypsirouheen/tiivisteen kuiva-ainepitoisuus (%): ");
+            rypsirouheKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            Console.Write("Syötä rypsirouheen/tiivisteen osuus (%) ruokinnassa: ");
+            rypsirouheProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Kysytään, onko käytössä rankkia/mäskiä, vain jos rypsirouhetta ei käytetä
+        bool onkoRankkiaTaiMaskia = false;
+        double rankkiTaiMaskiEnergia = 0, rankkiTaiMaskiKuivaAine = 0, rankkiTaiMaskiProsentti = 0;
+
+        if (!onkoRypsirouhetta)
+        {
+            Console.WriteLine("\nOnko käytössä rankkia/mäskiä? (k/e)");
+            onkoRankkiaTaiMaskia = Console.ReadLine().ToLower() == "k";
+
+            if (onkoRankkiaTaiMaskia)
+            {
+                Console.Write("Syötä rankin/mäskin energia-arvo (MJ/kg KA): ");
+                rankkiTaiMaskiEnergia = double.Parse(Console.ReadLine());
+
+                Console.Write("Syötä rankin/mäskin kuiva-ainepitoisuus (%): ");
+                rankkiTaiMaskiKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+                Console.Write("Syötä rankin/mäskin osuus (%) ruokinnassa: ");
+                rankkiTaiMaskiProsentti = double.Parse(Console.ReadLine()) / 100;
+            }
+        }
+
+        // Lasketaan lypsylehmän energiantarve
+        double energiantarveYllapito = 0.293 * elopaino;  // MJ/päivä
+        double energiantarveMaito = 3.14 * maidonMaara * (0.4 + 0.15 * maidonRasva);  // MJ/päivä (maidontuotanto)
+        double kokonaisEnergiantarve = energiantarveYllapito + energiantarveMaito;
+
+        // Lasketaan rehujen määrät, vain jos ne on valittu käyttöön
+        double nurmirehunMaaraMarka = 0, viljarehunMaaraMarka = 0, rypsirouheenMaaraMarka = 0, rankinTaiMaskinMaaraMarka = 0;
+
+        if (onkoNurmirehua)
+        {
+            double nurmirehunEnergiantarve = kokonaisEnergiantarve * nurmirehuProsentti;
+            double nurmirehunMaaraKA = nurmirehunEnergiantarve / nurmirehuEnergia;
+            nurmirehunMaaraMarka = nurmirehunMaaraKA / nurmirehuKuivaAine;
+        }
+
+        if (onkoViljarehua)
+        {
+            double viljarehunEnergiantarve = kokonaisEnergiantarve * viljarehuProsentti;
+            double viljarehunMaaraKA = viljarehunEnergiantarve / viljarehuEnergia;
+            viljarehunMaaraMarka = viljarehunMaaraKA / viljarehuKuivaAine;
+        }
+
+        if (onkoRypsirouhetta)
+        {
+            double rypsirouheenEnergiantarve = kokonaisEnergiantarve * rypsirouheProsentti;
+            double rypsirouheenMaaraKA = rypsirouheenEnergiantarve / rypsirouheEnergia;
+            rypsirouheenMaaraMarka = rypsirouheenMaaraKA / rypsirouheKuivaAine;
+        }
+        else if (onkoRankkiaTaiMaskia)
+        {
+            double rankinTaiMaskinEnergiantarve = kokonaisEnergiantarve * rankkiTaiMaskiProsentti;
+            double rankinTaiMaskinMaaraKA = rankinTaiMaskinEnergiantarve / rankkiTaiMaskiEnergia;
+            rankinTaiMaskinMaaraMarka = rankinTaiMaskinMaaraKA / rankkiTaiMaskiKuivaAine;
+        }
+
+        // Tulostetaan ruokintasuunnitelma
+        Console.WriteLine("\nLypsylehmän ruokintasuunnitelma:");
+        Console.WriteLine($"Kokonaisenergiantarve: {kokonaisEnergiantarve:F2} MJ/päivä");
+
+        if (onkoNurmirehua)
+            Console.WriteLine($"Nurmirehun määrä (märkärehuna): {nurmirehunMaaraMarka:F2} kg/päivä");
+
+        if (onkoViljarehua)
+            Console.WriteLine($"Viljarehun määrä (märkärehuna): {viljarehunMaaraMarka:F2} kg/päivä");
+
+        if (onkoRypsirouhetta)
+            Console.WriteLine($"Rypsirouheen/tiivisteen määrä (märkärehuna): {rypsirouheenMaaraMarka:F2} kg/päivä");
+
+        if (onkoRankkiaTaiMaskia)
+            Console.WriteLine($"Rankin/mäskin määrä (märkärehuna): {rankinTaiMaskinMaaraMarka:F2} kg/päivä");
+
+        // Pidetään ohjelma auki
+        Console.WriteLine("\nPaina Enter sulkeaksesi ohjelman.");
+        Console.ReadLine();
+    }
+
+    // Sonnin ruokintasuunnitelma
+    static void SonninRuokintasuunnitelma()
+    {
+        // Ohjelma pyytää syöttämään sonnin painon
+        Console.Write("Syötä sonnin paino (kg): ");
+        double paino = double.Parse(Console.ReadLine());
+
+        // Ohjelma kysyy, onko sonni siitoskäytössä
+        Console.WriteLine("Onko sonni siitoskäytössä? (k/e): ");
+        bool onkoSiitoskaytossa = Console.ReadLine().ToLower() == "k";
+
+        // Ylläpitoenergian vakio ei-siitossonnin energiantarpeelle MJ/pv/kg
+        double yllapitoEnergiaPerKg = 0.4;
+        // Lisäenergian vakio siitossonnin energiatarpeelle MJ/pv/kg
+        double siitosEnergiaLisays = 0.15;
+
+        double energiantarveYllapito = yllapitoEnergiaPerKg * paino;
+        double siitosEnergiantarve = 0;
+
+        if (onkoSiitoskaytossa)
+        {
+            // Jos sonni on siitoskäytössä, lisätään siitoskauden energiantarve
+            siitosEnergiantarve = siitosEnergiaLisays * paino;
+        }
+
+        // Kokonaisenergiantarve päivässä (MJ/pv)
+        double kokonaisEnergiantarve = energiantarveYllapito + siitosEnergiantarve;
+
+        // Ohjelma kysyy, onko käytössä viljarehua
+        Console.Write("Onko ruokinnassa käytössä viljarehua? (k/e): ");
+        bool onkoViljarehua = Console.ReadLine().ToLower() == "k";
+
+        double viljarehuEnergia = 0;
+        double viljarehuKuivaAine = 0;
+        double viljarehuProsentti = 0;
+
+        if (onkoViljarehua)
+        {
+            // Ohjelma pyytää syöttämään viljarehun energia-arvon
+            Console.Write("Syötä viljarehun energia-arvo (MJ/kg KA): ");
+            viljarehuEnergia = double.Parse(Console.ReadLine());
+
+            // Ohjelma pyytää syöttämään viljarehun kuiva-ainepitoisuuden
+            Console.Write("Syötä viljarehun kuiva-ainepitoisuus (%): ");
+            viljarehuKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            // Ohjelma pyytää syöttämään viljarehun osuuden ruokinnassa
+            Console.Write("Syötä viljarehun osuus ruokinnassa (%): ");
+            viljarehuProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Ohjelma kysyy, onko käytössä valkuaisrehua (esim. soijarouhetta)
+        Console.Write("Onko ruokinnassa käytössä valkuaisrehua (esim. soijarouhetta, rypsirouhetta)? (k/e): ");
+        bool onkoValkuaisrehua = Console.ReadLine().ToLower() == "k";
+
+        double valkuaisrehuEnergia = 0;
+        double valkuaisrehuKuivaAine = 0;
+        double valkuaisrehuProsentti = 0;
+
+        if (onkoValkuaisrehua)
+        {
+            // Ohjelma pyytää syöttämään valkuaisrehun energia-arvo
+            Console.Write("Syötä valkuaisrehun energia-arvo (MJ/kg KA): ");
+            valkuaisrehuEnergia = double.Parse(Console.ReadLine());
+
+            // Ohjelma pyytää syöttämään valkuaisrehun kuiva-ainepitoisuus
+            Console.Write("Syötä valkuaisrehun kuiva-ainepitoisuus (%): ");
+            valkuaisrehuKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            // Ohjelma pyytää syöttämään valkuaisrehun osuus ruokinnassa
+            Console.Write("Syötä valkuaisrehun osuus ruokinnassa (%): ");
+            valkuaisrehuProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Ohjelma laskee viljan ja valkuaisrehun määrän (kg märkärehuna)
+        double viljarehuMaaraMarka = 0, valkuaisrehuMaaraMarka = 0;
+
+        if (onkoViljarehua)
+        {
+            double viljarehuEnergiantarve = kokonaisEnergiantarve * viljarehuProsentti;
+            double viljarehuMaaraKA = viljarehuEnergiantarve / viljarehuEnergia;
+            viljarehuMaaraMarka = viljarehuMaaraKA / viljarehuKuivaAine;
+        }
+
+        if (onkoValkuaisrehua)
+        {
+            double valkuaisrehuEnergiantarve = kokonaisEnergiantarve * valkuaisrehuProsentti;
+            double valkuaisrehuMaaraKA = valkuaisrehuEnergiantarve / valkuaisrehuEnergia;
+            valkuaisrehuMaaraMarka = valkuaisrehuMaaraKA / valkuaisrehuKuivaAine;
+        }
+
+        // Ohjelma tulostaa sonnin ruokintasuunnitelman
+        Console.WriteLine("\nSonnin ruokintasuunnitelma:");
+        Console.WriteLine($"Kokonaisenergiantarve: {kokonaisEnergiantarve:F2} MJ/pv");
+
+        if (onkoViljarehua)
+        {
+            Console.WriteLine($"Viljarehun määrä (märkärehuna): {viljarehuMaaraMarka:F2} kg/pv");
+        }
+        else
+        {
+            Console.WriteLine("Ei viljarehua ruokinnassa.");
+        }
+
+        if (onkoValkuaisrehua)
+        {
+            Console.WriteLine($"Valkuaisrehun määrä (märkärehuna): {valkuaisrehuMaaraMarka:F2} kg/pv");
+        }
+        else
+        {
+            Console.WriteLine("Ei valkuaisrehua ruokinnassa.");
+        }
+
+        Console.WriteLine("\nPaina Enter sulkeaksesi ohjelman.");
+        Console.ReadLine();
+    }
+
+    // Hiehon ruokintasuunnitelma
+    static void HiehonRuokintasuunnitelma()
+    {
+        // Ohjelma pyytää käyttäjää syöttämään hiehon elopainon kilogrammoina
+        Console.Write("Syötä hiehon elopaino (kg): ");
+        double elopaino = double.Parse(Console.ReadLine());
+
+        // Ohjelma pyytää käyttäjää syöttämään hiehon tavoitteellisen päiväkasvun, jonka ohjelma muuttaa kilogrammoiksi
+        Console.Write("Syötä hiehon tavoitteellinen päiväkasvu (g/pv): ");
+        double painonnousu = double.Parse(Console.ReadLine()) / 1000;
+
+        // Ohjelma kysyy, onko käytössä nurmirehua
+        Console.WriteLine("\nOnko käytössä nurmirehua? (k/e)");
+        bool onkoNurmirehua = Console.ReadLine().ToLower() == "k";
+
+        double nurmirehuEnergia = 0, nurmirehuKuivaAine = 0, nurmirehuProsentti = 0;
+        if (onkoNurmirehua)
+        {
+            // Käyttäjä syöttää nurmirehun energia-arvon
+            Console.Write("Syötä nurmirehun energia-arvo (MJ/kg KA): ");
+            nurmirehuEnergia = double.Parse(Console.ReadLine());
+
+            // Käyttäjä syöttää nurmirehun kuiva-ainepitoisuuden
+            Console.Write("Syötä nurmirehun kuiva-ainepitoisuus (%): ");
+            nurmirehuKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            // Käyttäjä syöttää nurmirehun osuuden ruokinnassa
+            Console.Write("Syötä nurmirehun osuus (%) ruokinnassa: ");
+            nurmirehuProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Ohjelma kysyy, onko käytössä rehuviljaa
+        Console.WriteLine("\nOnko käytössä rehuviljaa? (k/e)");
+        bool onkoViljarehua = Console.ReadLine().ToLower() == "k";
+
+        double viljarehuEnergia = 0, viljarehuKuivaAine = 0, viljarehuProsentti = 0;
+        if (onkoViljarehua)
+        {
+            // Käyttäjä syöttää rehuviljan energia-arvon
+            Console.Write("Syötä rehuviljan energia-arvo (MJ/kg KA): ");
+            viljarehuEnergia = double.Parse(Console.ReadLine());
+
+            // Käyttäjä syöttää rehuviljan kuiva-ainepitoisuuden
+            Console.Write("Syötä rehuviljan kuiva-ainepitoisuus (%): ");
+            viljarehuKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            // Käyttäjä syöttää rehuviljan osuuden ruokinnassa
+            Console.Write("Syötä rehuviljan osuus (%) ruokinnassa: ");
+            viljarehuProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Ohjelma kysyy, onko käytössä rypsirouhetta/-tiivistettä
+        Console.WriteLine("\nOnko käytössä rypsirouhetta/-tiivistettä? (k/e)");
+        bool onkoRypsirouhetta = Console.ReadLine().ToLower() == "k";
+
+        double rypsirouheEnergia = 0, rypsirouheKuivaAine = 0, rypsirouheProsentti = 0;
+        if (onkoRypsirouhetta)
+        {
+            // Käyttäjä syöttää rypsirouheen/-tiivisteen energia-arvon
+            Console.Write("Syötä rypsirouheen/-tiivisteen energia-arvo (MJ/kg KA): ");
+            rypsirouheEnergia = double.Parse(Console.ReadLine());
+
+            // Käyttäjä syöttää rypsirouheen/-tiivisteen kuiva-ainepitoisuuden
+            Console.Write("Syötä rypsirouheen/-tiivisteen kuiva-ainepitoisuus (%): ");
+            rypsirouheKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            // Käyttäjä syöttää rypsirouheen/-tiivisteen osuuden ruokinnassa
+            Console.Write("Syötä rypsirouheen/-tiivisteen osuus (%) ruokinnassa: ");
+            rypsirouheProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Kysytään, onko käytössä rankkia/mäskiä, vain jos rypsirouhetta/-tiivistettä ei käytetä
+        bool onkoRankkiaTaiMaskia = false;
+        double rankkiTaiMaskiEnergia = 0, rankkiTaiMaskiKuivaAine = 0, rankkiTaiMaskiProsentti = 0;
+
+        if (!onkoRypsirouhetta)
+        {
+            // Ohjelma kysyy, onko käytössä rankkia/mäskiä
+            Console.WriteLine("\nOnko käytössä rankkia/mäskiä? (k/e)");
+            onkoRankkiaTaiMaskia = Console.ReadLine().ToLower() == "k";
+
+            if (onkoRankkiaTaiMaskia)
+            {
+                // Käyttäjä syöttää rankin/mäskin energia-arvon
+                Console.Write("Syötä rankin/mäskin energia-arvo (MJ/kg KA): ");
+                rankkiTaiMaskiEnergia = double.Parse(Console.ReadLine());
+
+                // Käyttäjä syöttää rankin/mäskin kuiva-ainepitoisuuden
+                Console.Write("Syötä rankin/mäskin kuiva-ainepitoisuus (%): ");
+                rankkiTaiMaskiKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+                // Käyttäjä syöttää rankin/mäskin osuuden ruokinnassa
+                Console.Write("Syötä rankin/mäskin osuus (%) ruokinnassa: ");
+                rankkiTaiMaskiProsentti = double.Parse(Console.ReadLine()) / 100;
+            }
+        }
+
+        // Ohjelma laskee hiehon energiantarpeen MJ/pv
+        double energiantarveYllapito = 0.293 * elopaino;
+        // Ohjelma laskee hiehon energiantarpeen MJ/pv (painonnousun mukainen lisäenergia)
+        double energiantarveKasvu = 35 * painonnousu;
+        // Ohjelma laskee hiehon kokonaisenergiantarpeen
+        double kokonaisEnergiantarve = energiantarveYllapito + energiantarveKasvu;
+
+        // Ohjelma laskee rehujen määrät, vain jos ne on valittu käyttöön
+        double nurmirehunMaaraMarka = 0, viljarehunMaaraMarka = 0, rypsirouheenMaaraMarka = 0, rankinMaaraMarka = 0;
+
+        if (onkoNurmirehua)
+        {
+            double nurmirehunEnergiantarve = kokonaisEnergiantarve * nurmirehuProsentti;
+            double nurmirehunMaaraKA = nurmirehunEnergiantarve / nurmirehuEnergia;
+            nurmirehunMaaraMarka = nurmirehunMaaraKA / nurmirehuKuivaAine;
+        }
+
+        if (onkoViljarehua)
+        {
+            double viljarehunEnergiantarve = kokonaisEnergiantarve * viljarehuProsentti;
+            double viljarehunMaaraKA = viljarehunEnergiantarve / viljarehuEnergia;
+            viljarehunMaaraMarka = viljarehunMaaraKA / viljarehuKuivaAine;
+        }
+
+        if (onkoRypsirouhetta)
+        {
+            double rypsirouheenEnergiantarve = kokonaisEnergiantarve * rypsirouheProsentti;
+            double rypsirouheenMaaraKA = rypsirouheenEnergiantarve / rypsirouheEnergia;
+            rypsirouheenMaaraMarka = rypsirouheenMaaraKA / rypsirouheKuivaAine;
+        }
+        else if (onkoRankkiaTaiMaskia)
+        {
+            double rankinEnergiantarve = kokonaisEnergiantarve * rankkiTaiMaskiProsentti;
+            double rankinMaaraKA = rankinEnergiantarve / rankkiTaiMaskiEnergia;
+            rankinMaaraMarka = rankinMaaraKA / rankkiTaiMaskiKuivaAine;
+        }
+
+        // Ohjelma tulostaa hiehon ruokintasuunnitelman
+        Console.WriteLine("\nHiehon ruokintasuunnitelma:");
+        Console.WriteLine($"Kokonaisenergiantarve: {kokonaisEnergiantarve:F2} MJ/päivä");
+
+        if (onkoNurmirehua)
+            Console.WriteLine($"Nurmirehun määrä (märkärehuna): {nurmirehunMaaraMarka:F2} kg/päivä");
+
+        if (onkoViljarehua)
+            Console.WriteLine($"Viljarehun määrä (märkärehuna): {viljarehunMaaraMarka:F2} kg/päivä");
+
+        if (onkoRypsirouhetta)
+            Console.WriteLine($"Rypsirouheen/-tiivisteen määrä (märkärehuna): {rypsirouheenMaaraMarka:F2} kg/päivä");
+
+        if (onkoRankkiaTaiMaskia)
+            Console.WriteLine($"Rankin/mäskin määrä (märkärehuna): {rankinMaaraMarka:F2} kg/päivä");
+
+        // Pidetään ohjelma auki
+        Console.WriteLine("\nPaina Enter sulkeaksesi ohjelman.");
+        Console.ReadLine();
+    }
+
+    // Härän ruokintasuunnitelm
+    static void HäränRuokintasuunnitelma()
+    {
+        // Ohjelma pyytää käyttäjää syöttämään härän painon
+        Console.Write("Syötä härän paino (kg): ");
+        double paino = double.Parse(Console.ReadLine());
+
+        // Ohjelma laskee härän energiantarpeen, esim. 0.55 MJ/painokilo
+        double energiantarve = 0.55 * paino;
+
+        Console.WriteLine($"\nHärän energiantarve on {energiantarve:F2} MJ/päivä.");
+
+        // Ohjelma kysyy, onko viljarehua käytössä
+        Console.WriteLine("\nOnko käytössä viljarehua? (k/e)");
+        bool onkoViljarehua = Console.ReadLine().ToLower() == "k";
+
+        double viljarehuEnergia = 0, viljarehuKuivaAine = 0, viljarehuProsentti = 0;
+        // Jos viljaa käytetään
+        if (onkoViljarehua)
+        {
+            // Pyydetään syöttämään viljarehun energia-arvo
+            Console.Write("Syötä viljarehun energia-arvo (MJ/kg KA): ");
+            viljarehuEnergia = double.Parse(Console.ReadLine());
+
+            // Pyydetään syöttämään viljarehun kuiva-ainepitoisuus
+            Console.Write("Syötä viljarehun kuiva-ainepitoisuus (%): ");
+            viljarehuKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            // Pyydetään syöttämään viljarehun osuus ruokinnassa
+            Console.Write("Syötä viljan osuus (%) ruokinnassa: ");
+            viljarehuProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Kysytään, onko säilörehua käytössä
+        Console.WriteLine("\nOnko käytössä säilörehua? (k/e)");
+        bool onkoSailorehua = Console.ReadLine().ToLower() == "k";
+
+        double sailorehuEnergia = 0, sailorehuKuivaAine = 0, sailorehuProsentti = 0;
+        // Jos säilörehua käytetään
+        if (onkoSailorehua)
+        {
+            // Pyydetään syöttämään säilörehun energia-arvo
+            Console.Write("Syötä säilörehun energia-arvo (MJ/kg KA): ");
+            sailorehuEnergia = double.Parse(Console.ReadLine());
+
+            // Pyydetään syöttämään säilörehun kuiva-ainepitoisuus
+            Console.Write("Syötä säilörehun kuiva-ainepitoisuus (%): ");
+            sailorehuKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            // Pyydetään syöttämään säilörehun osuus ruokinnassa
+            Console.Write("Syötä säilörehun osuus (%) ruokinnassa: ");
+            sailorehuProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Kysytään, onko valkuaisrehua käytössä (esim. rypsi tai soija)
+        Console.WriteLine("\nOnko käytössä valkuaisrehua (rypsi/soija)? (k/e)");
+        bool onkoValkuaisrehua = Console.ReadLine().ToLower() == "k";
+
+        double valkuaisrehuEnergia = 0, valkuaisrehuKuivaAine = 0, valkuaisrehuProsentti = 0;
+        // Jos valkuaisrehua käytetään
+        if (onkoValkuaisrehua)
+        {
+            // Pyydetään syöttämään valkuaisrehun energia-arvo
+            Console.Write("Syötä valkuaisrehun energia-arvo (MJ/kg KA): ");
+            valkuaisrehuEnergia = double.Parse(Console.ReadLine());
+
+            // Pyydetään syöttämään valkuaisrehun kuiva-ainepitoisuus
+            Console.Write("Syötä valkuaisrehun kuiva-ainepitoisuus (%): ");
+            valkuaisrehuKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            // Pyydetään syöttämään valkuaisrehun osuus ruokinnassa
+            Console.Write("Syötä valkuaisrehun osuus (%) ruokinnassa: ");
+            valkuaisrehuProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Ohjelma laskee rehujen määrät
+        double viljarehunMaara = 0, sailorehunMaara = 0, valkuaisrehunMaara = 0;
+
+        if (onkoViljarehua)
+        {
+            double viljarehunEnergiantarve = energiantarve * viljarehuProsentti;
+            double viljarehunMaaraKA = viljarehunEnergiantarve / viljarehuEnergia;
+            viljarehunMaara = viljarehunMaaraKA / viljarehuKuivaAine;
+        }
+
+        if (onkoSailorehua)
+        {
+            double sailorehunEnergiantarve = energiantarve * sailorehuProsentti;
+            double sailorehunMaaraKA = sailorehunEnergiantarve / sailorehuEnergia;
+            sailorehunMaara = sailorehunMaaraKA / sailorehuKuivaAine;
+        }
+
+        if (onkoValkuaisrehua)
+        {
+            double valkuaisrehunEnergiantarve = energiantarve * valkuaisrehuProsentti;
+            double valkuaisrehunMaaraKA = valkuaisrehunEnergiantarve / valkuaisrehuEnergia;
+            valkuaisrehunMaara = valkuaisrehunMaaraKA / valkuaisrehuKuivaAine;
+        }
+
+        // Tulostetaan härän ruokintasuunnitelma
+        Console.WriteLine("\nHärän ruokintasuunnitelma:");
+        Console.WriteLine($"Kokonaisenergiantarve: {energiantarve:F2} MJ/päivä");
+
+        if (onkoViljarehua)
+            Console.WriteLine($"Viljarehun määrä: {viljarehunMaara:F2} kg/päivä");
+
+        if (onkoSailorehua)
+            Console.WriteLine($"Säilörehun määrä: {sailorehunMaara:F2} kg/päivä");
+
+        if (onkoValkuaisrehua)
+            Console.WriteLine($"Valkuaisrehun määrä: {valkuaisrehunMaara:F2} kg/päivä");
+
+        Console.WriteLine("\nPaina Enter sulkeaksesi ohjelman.");
+        Console.ReadLine();
+    }
+
+    // Vasikan ruokintasuunnitelma
+    static void VasikanRuokintasuunnitelma()
+    {
+        // Ohjelma pyytää käyttäjää syöttämään vasikan elopainon kilogrammoina
+        Console.Write("Syötä vasikan paino (kg): ");
+        double paino = double.Parse(Console.ReadLine());
+
+        // Ohjelma laskee vasikan energiantarpeen (noin 0,45 MJ/kg/pv)
+        double energiantarve = 0.45 * paino;
+
+        Console.WriteLine($"\nVasikan energiantarve on {energiantarve:F2} MJ/päivä.");
+
+        // Ohjelma kysyy, onko käytössä maitojuomaa
+        Console.WriteLine("\nOnko käytössä maitojuomaa/maidonkorviketta? (k/e)");
+        bool onkoMaitojuomaa = Console.ReadLine().ToLower() == "k";
+
+        double maitojuomaEnergia = 0, maitojuomaKuivaAine = 0, maitojuomaProsentti = 0;
+        // Jos käytetään maitojuomaa
+        if (onkoMaitojuomaa)
+        {
+            // Ohjelma pyytää syöttämään maitojuoman energia-arvon
+            Console.Write("Syötä maitojuoman energia-arvo (MJ/l): ");
+            maitojuomaEnergia = double.Parse(Console.ReadLine());
+
+            // Ohjelma pyytää syöttämään maitojuoman kuiva-ainepitoisuuden
+            Console.Write("Syötä maitojuoman kuiva-ainepitoisuus (%): ");
+            maitojuomaKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            // Ohjelma pyytää syöttämään maitojuoman osuuden ruokinnassa
+            Console.Write("Syötä maitojuoman osuus (%) ruokinnassa: ");
+            maitojuomaProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Ohjelma kysyy, onko käytössä väkirehua
+        Console.WriteLine("\nOnko käytössä väkirehua? (k/e)");
+        bool onkoVakirehua = Console.ReadLine().ToLower() == "k";
+
+        double vakirehuEnergia = 0, vakirehuKuivaAine = 0, vakirehuProsentti = 0;
+        // Jos käytetään väkirehua
+        if (onkoVakirehua)
+        {
+            // Ohjelma pyytää syöttämään väkirehun energia-arvon
+            Console.Write("Syötä väkirehun energia-arvo (MJ/kg KA): ");
+            vakirehuEnergia = double.Parse(Console.ReadLine());
+
+            // Ohjelma pyytää syöttämään väkirehun kuiva-ainepitoisuuden
+            Console.Write("Syötä väkirehun kuiva-ainepitoisuus (%): ");
+            vakirehuKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            // Ohjelma pyytää syöttämään väkirehun osuuden ruokinnassa
+            Console.Write("Syötä väkirehun osuus (%) ruokinnassa: ");
+            vakirehuProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Ohjelma kysyy, onko käytössä kuivaheinää
+        Console.WriteLine("\nOnko käytössä kuivaheinää? (k/e)");
+        bool onkoKuivaheinaa = Console.ReadLine().ToLower() == "k";
+
+        double kuivaheinaEnergia = 0, kuivaheinaKuivaAine = 0, kuivaheinaProsentti = 0;
+        // Jos käytetään kuivaheinää
+        if (onkoKuivaheinaa)
+        {
+            // Ohjelma pyytää syöttämään kuivaheinän energia-arvon
+            Console.Write("Syötä kuivaheinän energia-arvo (MJ/kg KA): ");
+            kuivaheinaEnergia = double.Parse(Console.ReadLine());
+
+            // Ohjelma pyytää syöttämään kuivaheinän kuiva-ainepitoisuuden
+            Console.Write("Syötä kuivaheinän kuiva-ainepitoisuus (%): ");
+            kuivaheinaKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            // Ohjelma pyytää syöttämään kuivaheinän osuuden ruokinnassa
+            Console.Write("Syötä kuivaheinän osuus (%) ruokinnassa: ");
+            kuivaheinaProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Ohjelma laskee rehujen määrät
+        double maitojuomaMaara = 0, vakirehunMaara = 0, kuivaheinanMaara = 0;
+
+        if (onkoMaitojuomaa)
+        {
+            double maitojuomanEnergiantarve = energiantarve * maitojuomaProsentti;
+            maitojuomaMaara = maitojuomanEnergiantarve / maitojuomaEnergia;
+        }
+
+        if (onkoVakirehua)
+        {
+            double vakirehunEnergiantarve = energiantarve * vakirehuProsentti;
+            double vakirehunMaaraKA = vakirehunEnergiantarve / vakirehuEnergia;
+            vakirehunMaara = vakirehunMaaraKA / vakirehuKuivaAine;
+        }
+
+        if (onkoKuivaheinaa)
+        {
+            double kuivaheinanEnergiantarve = energiantarve * kuivaheinaProsentti;
+            double kuivaheinanMaaraKA = kuivaheinanEnergiantarve / kuivaheinaEnergia;
+            kuivaheinanMaara = kuivaheinanMaaraKA / kuivaheinaKuivaAine;
+        }
+
+        // Ohjelma tulostaa vasikan ruokintasuunnitelman
+        Console.WriteLine("\nVasikan ruokintasuunnitelma:");
+        Console.WriteLine($"Kokonaisenergiantarve: {energiantarve:F2} MJ/päivä");
+
+        if (onkoMaitojuomaa)
+            Console.WriteLine($"Maitojuoman määrä: {maitojuomaMaara:F2} litraa/päivä");
+
+        if (onkoVakirehua)
+            Console.WriteLine($"Väkirehun määrä: {vakirehunMaara:F2} kg/päivä");
+
+        if (onkoKuivaheinaa)
+            Console.WriteLine($"Heinän määrä: {kuivaheinanMaara:F2} kg/päivä");
+
+        Console.WriteLine("\nPaina Enter sulkeaksesi ohjelman.");
+        Console.ReadLine();
+    }
+
+    // Sikojen ruokintasuunnitelma
+
+    // Emakon ruokintasuunnitelma
+    static void EmakonRuokintasuunnitelma()
+    {
+        // Ohjelma pyytää käyttäjän syöttämään emakon elopainon
+        Console.Write("Syötä emakon elopaino (kg): ");
+        double elopaino = double.Parse(Console.ReadLine());
+
+        // Ohjelma kysyy, onko emakko tiineenä
+        Console.Write("Onko emakko tiineenä? (k/e): ");
+        bool onkoTiineena = Console.ReadLine().ToLower() == "k";
+
+        double tiineysEnergiantarve = 0;
+
+        // Jos emakko on tiineenä
+        if (onkoTiineena)
+        {
+            // Ohjelma kysyy tiineyden vaihetta päivinä
+            Console.Write("Syötä tiineyden vaihe (päiviä): ");
+            int tiineysPaivat = int.Parse(Console.ReadLine());
+
+            // Energiantarve tiineenä kasvaa tiineyden aikana
+            if (tiineysPaivat < 90)
+                // Tiineyden ensimmäinen puolikas MJ/pv
+                tiineysEnergiantarve = 5.0;
+            else
+                // Tiineyden toinen puolikas MJ/pv
+                tiineysEnergiantarve = 10.0;
+        }
+
+        // Ohjelma kysyy, imettääkö emakko
+        Console.Write("Imettääkö emakko? (k/e): ");
+        bool onkoImettava = Console.ReadLine().ToLower() == "k";
+
+        double imetysEnergiantarve = 0;
+
+        // Jos emakko imettää
+        if (onkoImettava)
+        {
+            // Ohjelma kysyy porsaiden lukumäärää
+            Console.Write("Syötä porsaiden lukumäärä: ");
+            int porsaat = int.Parse(Console.ReadLine());
+
+            // Energiantarve 2,5 MJ/porsas/pv
+            imetysEnergiantarve = porsaat * 2.5;
+        }
+
+        // Ohjelma kysyy, onko käytössä viljarehua
+        Console.WriteLine("\nOnko käytössä viljarehua? (k/e)");
+        bool onkoViljarehua = Console.ReadLine().ToLower() == "k";
+
+        double viljarehuEnergia = 0, viljarehuKuivaAine = 0, viljarehuProsentti = 0;
+
+        // Jos on viljarehua
+        if (onkoViljarehua)
+        {
+            // Ohjelma pyytää syöttämään viljarehun energia-arvon
+            Console.Write("Syötä viljarehun energia-arvo (MJ/kg KA): ");
+            viljarehuEnergia = double.Parse(Console.ReadLine());
+
+            // Ohjelma pyytää syöttämään viljarehun kuiva-ainepitoisuuden
+            Console.Write("Syötä viljarehun kuiva-ainepitoisuus (%): ");
+            viljarehuKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            // Ohjelma pyytää syöttämään viljarehun osuuden ruokinnassa
+            Console.Write("Syötä viljarehun osuus (%) ruokinnassa: ");
+            viljarehuProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Ohjelma kysyy, onko käytössä soijarouhetta
+        Console.WriteLine("\nOnko käytössä soijarouhetta? (k/e)");
+        bool onkoSoijarouhetta = Console.ReadLine().ToLower() == "k";
+
+        double soijarouheEnergia = 0, soijarouheKuivaAine = 0, soijarouheProsentti = 0;
+
+        // Jos on soijarouhetta
+        if (onkoSoijarouhetta)
+        {
+            // Ohjelma pyytää syöttämään soijarouheen energia-arvon
+            Console.Write("Syötä soijarouheen energia-arvo (MJ/kg KA): ");
+            soijarouheEnergia = double.Parse(Console.ReadLine());
+
+            // Ohjelma pyytää syöttämään soijarouheen kuiva-ainepitoisuuden
+            Console.Write("Syötä soijarouheen kuiva-ainepitoisuus (%): ");
+            soijarouheKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            // Ohjelma pyytää syöttämään soijarouheen osuuden ruokinnassa
+            Console.Write("Syötä soijarouheen osuus (%) ruokinnassa: ");
+            soijarouheProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Ohjelma kysyy, onko käytössä rypsirouhetta/-tiivistettä
+        Console.WriteLine("\nOnko käytössä rypsirouhetta/tiivistettä? (k/e)");
+        bool onkoRypsirouhetta = Console.ReadLine().ToLower() == "k";
+
+        double rypsirouheEnergia = 0, rypsirouheKuivaAine = 0, rypsirouheProsentti = 0;
+
+        // Jos on rypsirouhetta
+        if (onkoRypsirouhetta)
+        {
+            // Ohjelma pyytää syöttämään rypsirouheen/-tiivisteen energia-arvon
+            Console.Write("Syötä rypsirouheen/-tiivisteen energia-arvo (MJ/kg KA): ");
+            rypsirouheEnergia = double.Parse(Console.ReadLine());
+
+            // Ohjelma pyytää syöttämään rypsirouheen/-tiivisteen kuiva-ainepitoisuuden
+            Console.Write("Syötä rypsirouheen/-tiivisteen kuiva-ainepitoisuus (%): ");
+            rypsirouheKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            // Ohjelma pyytää syöttämään rypsirouheen/-tiivisteen osuuden ruokinnassa
+            Console.Write("Syötä rypsirouheen/-tiivisteen osuus (%) ruokinnassa: ");
+            rypsirouheProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Ohjelma kysyy, onko käytössä rankkia/mäskiä, jos rypsirouhetta/-tiivistettä ei käytetä
+        bool onkoRankkiaTaiMaskia = false;
+        double rankkiTaiMaskiEnergia = 0, rankkiTaiMaskiKuivaAine = 0, rankkiTaiMaskiProsentti = 0;
+        if (!onkoRypsirouhetta)
+        {
+            // Ohjelma kysyy, onko käytössä rankkia/mäskiä
+            Console.WriteLine("\nOnko käytössä rankkia/mäskiä? (k/e)");
+            onkoRankkiaTaiMaskia = Console.ReadLine().ToLower() == "k";
+
+            // Jos on rankkia tai mäskiä
+            if (onkoRankkiaTaiMaskia)
+            {
+                // Ohjelma pyytää syöttämään rankin/mäskin energia-arvon
+                Console.Write("Syötä rankin/mäskin energia-arvo (MJ/kg KA): ");
+                rankkiTaiMaskiEnergia = double.Parse(Console.ReadLine());
+
+                // Ohjelma pyytää syöttämään rankin/mäskin kuiva-ainepitoisuuden
+                Console.Write("Syötä rankin/mäskin kuiva-ainepitoisuus (%): ");
+                rankkiTaiMaskiKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+                // Ohjelma pyytää syöttämään rankin/mäskin osuuden ruokinnassa
+                Console.Write("Syötä rankin/mäskin osuus (%) ruokinnassa: ");
+                rankkiTaiMaskiProsentti = double.Parse(Console.ReadLine()) / 100;
+            }
+        }
+
+        // Ohjelma laskee emakon energiantarpeen (ylläpito, tiineys ja imetys) MJ/pv
+        double energiantarveYllapito = 0.44 * elopaino;
+        double kokonaisEnergiantarve = energiantarveYllapito + tiineysEnergiantarve + imetysEnergiantarve;
+
+        // Ohjelma laskee rehujen määrät
+        double viljarehunMaaraMarka = 0, soijarouheenMaaraMarka = 0, rypsirouheenMaaraMarka = 0, rankinMaaraMarka = 0;
+
+        if (onkoViljarehua)
+        {
+            double viljarehunEnergiantarve = kokonaisEnergiantarve * viljarehuProsentti;
+            double viljarehunMaaraKA = viljarehunEnergiantarve / viljarehuEnergia;
+            viljarehunMaaraMarka = viljarehunMaaraKA / viljarehuKuivaAine;
+        }
+
+        if (onkoSoijarouhetta)
+        {
+            double soijarouheenEnergiantarve = kokonaisEnergiantarve * soijarouheProsentti;
+            double soijarouheenMaaraKA = soijarouheenEnergiantarve / soijarouheEnergia;
+            soijarouheenMaaraMarka = soijarouheenMaaraKA / soijarouheKuivaAine;
+        }
+
+        if (onkoRypsirouhetta)
+        {
+            double rypsirouheenEnergiantarve = kokonaisEnergiantarve * rypsirouheProsentti;
+            double rypsirouheenMaaraKA = rypsirouheenEnergiantarve / rypsirouheEnergia;
+            rypsirouheenMaaraMarka = rypsirouheenMaaraKA / rypsirouheKuivaAine;
+        }
+        else if (onkoRankkiaTaiMaskia)
+        {
+            double rankinEnergiantarve = kokonaisEnergiantarve * rankkiTaiMaskiProsentti;
+            double rankinMaaraKA = rankinEnergiantarve / rankkiTaiMaskiEnergia;
+            rankinMaaraMarka = rankinMaaraKA / rankkiTaiMaskiKuivaAine;
+        }
+
+        // Ohjelma tulostaa emakon ruokintasuunnitelman
+        Console.WriteLine("\nEmakon ruokintasuunnitelma:");
+        Console.WriteLine($"Kokonaisenergiantarve: {kokonaisEnergiantarve:F2} MJ/pv");
+
+        if (onkoViljarehua)
+            Console.WriteLine($"Viljarehun määrä (märkärehuna): {viljarehunMaaraMarka:F2} kg/pv");
+
+        if (onkoSoijarouhetta)
+            Console.WriteLine($"Soijarouheen määrä (märkärehuna): {soijarouheenMaaraMarka:F2} kg/pv");
+
+        if (onkoRypsirouhetta)
+            Console.WriteLine($"Rypsirouheen/tiivisteen määrä (märkärehuna): {rypsirouheenMaaraMarka:F2} kg/pv");
+
+        if (onkoRankkiaTaiMaskia)
+            Console.WriteLine($"Rankin/mäskin määrä (märkärehuna): {rankinMaaraMarka:F2} kg/pv");
+
+        Console.WriteLine("\nPaina Enter sulkeaksesi ohjelman.");
+        Console.ReadLine();
+    }
+
+    // Karjun ruokintasuunnitelma
+    static void KarjunRuokintasuunnitelma()
+    {
+        // Ohjelma pyytää käyttäjältä karjun elopainon
+        Console.Write("Syötä karjun elopaino (kg): ");
+        double elopaino = double.Parse(Console.ReadLine());
+
+        // Ohjelma kysyy, onko karju siitoskäytössä
+        Console.Write("Onko karju siitoskäytössä? (k/e): ");
+        bool onkoSiitoskaytossa = Console.ReadLine().ToLower() == "k";
+
+        // Ylläpitoenergiantarve
+        double energianTarve = 0.5 * elopaino;
+        if (onkoSiitoskaytossa)
+        {
+            // Lisäenergiantarve siitoskäytössä
+            energianTarve += 5.0;
+        }
+
+        // Ohjelma kysyy, onko käytössä viljarehua
+        Console.WriteLine("\nOnko käytössä viljarehua? (k/e)");
+        bool onkoViljarehua = Console.ReadLine().ToLower() == "k";
+
+        double viljarehuEnergia = 0, viljarehuKuivaAine = 0, viljarehuProsentti = 0;
+
+        // Jos on viljarehua
+        if (onkoViljarehua)
+        {
+            // Ohjelma pyytää syöttämään viljarehun energia-arvon
+            Console.Write("Syötä viljarehun energia-arvo (MJ/kg KA): ");
+            viljarehuEnergia = double.Parse(Console.ReadLine());
+
+            // Ohjelma pyytää syöttämään viljarehun kuiva-ainepitoisuuden
+            Console.Write("Syötä viljarehun kuiva-ainepitoisuus (%): ");
+            viljarehuKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            // Ohjelma pyytää syöttämään viljarehun osuuden ruokinnassa
+            Console.Write("Syötä viljarehun osuus (%) ruokinnassa: ");
+            viljarehuProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Ohjelma tulostaa karjun ruokintasuunnitelman
+        Console.WriteLine($"\nKarjun energian tarve: {energianTarve:F2} MJ/pv");
+        if (onkoViljarehua)
+        {
+            // Kuiva-aine
+            double viljarehunMaaraKA = energianTarve * viljarehuProsentti / viljarehuEnergia;
+            // Märkärehuna
+            double viljarehunMaaraMarka = viljarehunMaaraKA / viljarehuKuivaAine;
+            Console.WriteLine($"Viljarehun määrä (märkärehuna): {viljarehunMaaraMarka:F2} kg/pv");
+        }
+    }
+
+    // Porsimattoman naarassian ruokintasuunnitelma
+    static void PorsimattomanNaarassianRuokintasuunnitelma()
+    {
+        // Ohjelma pyytää käyttäjältä porsimattoman naarassian elopainon
+        Console.Write("Syötä porsimattoman naarassian elopaino (kg): ");
+        double elopaino = double.Parse(Console.ReadLine());
+
+        // Ylläpidon energiantarve MJ/pv
+        double yllapitoEnergiantarve = 0.44 * elopaino;
+        // Ei kasvua, vain ylläpidon energiantarve
+        double kokonaisEnergiantarve = yllapitoEnergiantarve;
+
+        // Ohjelma kysyy, onko käytössä viljarehua
+        Console.WriteLine("\nOnko käytössä viljarehua? (k/e)");
+        bool onkoViljarehua = Console.ReadLine().ToLower() == "k";
+
+        double viljarehuEnergia = 0, viljarehuKuivaAine = 0, viljarehuProsentti = 0;
+
+        // Jos on viljarehua
+        if (onkoViljarehua)
+        {
+            // Ohjelma pyytää syöttämään viljarehun energia-arvon
+            Console.Write("Syötä viljarehun energia-arvo (MJ/kg KA): ");
+            viljarehuEnergia = double.Parse(Console.ReadLine());
+
+            // Ohjelma pyytää syöttämään viljarehun kuiva-ainepitoisuuden
+            Console.Write("Syötä viljarehun kuiva-ainepitoisuus (%): ");
+            viljarehuKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            // Ohjelma pyytää syöttämään viljarehun osuuden ruokinnassa
+            Console.Write("Syötä viljarehun osuus (%) ruokinnassa: ");
+            viljarehuProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Ohjelma kysyy, onko käytössä soijarouhetta
+        Console.WriteLine("\nOnko käytössä soijarouhetta? (k/e)");
+        bool onkoSoijarouhetta = Console.ReadLine().ToLower() == "k";
+
+        double soijarouheEnergia = 0, soijarouheKuivaAine = 0, soijarouheProsentti = 0;
+        // Jos on soijarouhetta
+        if (onkoSoijarouhetta)
+        {
+            // Ohjelma pyytää syöttämään soijarouheen energia-arvon
+            Console.Write("Syötä soijarouheen energia-arvo (MJ/kg KA): ");
+            soijarouheEnergia = double.Parse(Console.ReadLine());
+
+            // Ohjelma pyytää syöttämään soijarouheen kuiva-ainepitoisuuden
+            Console.Write("Syötä soijarouheen kuiva-ainepitoisuus (%): ");
+            soijarouheKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            // Ohjelma pyytää syöttämään soijarouheen osuuden ruokinnassa
+            Console.Write("Syötä soijarouheen osuus (%) ruokinnassa: ");
+            soijarouheProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Ohjelma kysyy, onko käytössä rypsirouhetta/-tiivistettä
+        Console.WriteLine("\nOnko käytössä rypsirouhetta/-tiivistettä? (k/e)");
+        bool onkoRypsirouhetta = Console.ReadLine().ToLower() == "k";
+
+        double rypsirouheEnergia = 0, rypsirouheKuivaAine = 0, rypsirouheProsentti = 0;
+        // Jos on rypsirouhetta/-tiivistettä
+        if (onkoRypsirouhetta)
+        {
+            // Ohjelma pyytää syöttämään rypsirouheen/-tiivisteen energia-arvon
+            Console.Write("Syötä rypsirouheen/-tiivisteen energia-arvo (MJ/kg KA): ");
+            rypsirouheEnergia = double.Parse(Console.ReadLine());
+
+            // Ohjelma pyytää syöttämään rypsirouheen/-tiivisteen kuiva-ainepitoisuuden
+            Console.Write("Syötä rypsirouheen/-tiivisteen kuiva-ainepitoisuus (%): ");
+            rypsirouheKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            // Ohjelma pyytää syöttämään rypsirouheen/-tiivisteen osuuden ruokinnassa
+            Console.Write("Syötä rypsirouheen/-tiivisteen osuus (%) ruokinnassa: ");
+            rypsirouheProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Ohjelma kysyy, onko käytössä rankkia/mäskiä, jos rypsirouhetta/-tiivistettä ei käytetä
+        bool onkoRankkiaTaiMaskia = false;
+        double rankkiTaiMaskiEnergia = 0, rankkiTaiMaskiKuivaAine = 0, rankkiTaiMaskiProsentti = 0;
+
+        if (!onkoRypsirouhetta)
+        {
+            // Ohjelma kysyy, onko käytössä rankkia/mäskiä
+            Console.WriteLine("\nOnko käytössä rankkia/mäskiä? (k/e)");
+            onkoRankkiaTaiMaskia = Console.ReadLine().ToLower() == "k";
+
+            // Jos on rankkia/mäskiä
+            if (onkoRankkiaTaiMaskia)
+            {
+                // Ohjelma pyytää syöttämään rankin/mäskin energia-arvon
+                Console.Write("Syötä rankin/mäskin energia-arvo (MJ/kg KA): ");
+                rankkiTaiMaskiEnergia = double.Parse(Console.ReadLine());
+
+                // Ohjelma pyytää syöttämään rankin/mäskin kuiva-ainepitoisuuden
+                Console.Write("Syötä rankin/mäskin kuiva-ainepitoisuus (%): ");
+                rankkiTaiMaskiKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+                // Ohjelma pyytää syöttämään rankin/mäskin osuuden ruokinnassa
+                Console.Write("Syötä rankin/mäskin osuus (%) ruokinnassa: ");
+                rankkiTaiMaskiProsentti = double.Parse(Console.ReadLine()) / 100;
+            }
+        }
+
+        // Ohjelma laskee rehujen määrät energiantarpeen perusteella
+        double viljarehunMaaraMarka = 0, soijarouheenMaaraMarka = 0, rypsirouheenMaaraMarka = 0, rankinTaiMaskinMaaraMarka = 0;
+
+        if (onkoViljarehua)
+        {
+            double viljarehunEnergiantarve = kokonaisEnergiantarve * viljarehuProsentti;
+            double viljarehunMaaraKA = viljarehunEnergiantarve / viljarehuEnergia;
+            viljarehunMaaraMarka = viljarehunMaaraKA / viljarehuKuivaAine;
+        }
+
+        if (onkoSoijarouhetta)
+        {
+            double soijarouheenEnergiantarve = kokonaisEnergiantarve * soijarouheProsentti;
+            double soijarouheenMaaraKA = soijarouheenEnergiantarve / soijarouheEnergia;
+            soijarouheenMaaraMarka = soijarouheenMaaraKA / soijarouheKuivaAine;
+        }
+
+        if (onkoRypsirouhetta)
+        {
+            double rypsirouheenEnergiantarve = kokonaisEnergiantarve * rypsirouheProsentti;
+            double rypsirouheenMaaraKA = rypsirouheenEnergiantarve / rypsirouheEnergia;
+            rypsirouheenMaaraMarka = rypsirouheenMaaraKA / rypsirouheKuivaAine;
+        }
+        else if (onkoRankkiaTaiMaskia)
+        {
+            double rankinTaiMaskinEnergiantarve = kokonaisEnergiantarve * rankkiTaiMaskiProsentti;
+            double rankinTaiMaskinMaaraKA = rankinTaiMaskinEnergiantarve / rankkiTaiMaskiEnergia;
+            rankinTaiMaskinMaaraMarka = rankinTaiMaskinMaaraKA / rankkiTaiMaskiKuivaAine;
+        }
+
+        // Ohjelma tulostaa porsimattoman naarassian ruokintasuunnitelman
+        Console.WriteLine("\nPorsimattoman naarassian ruokintasuunnitelma:");
+        Console.WriteLine($"Kokonaisenergiantarve: {kokonaisEnergiantarve:F2} MJ/pv");
+
+        if (onkoViljarehua)
+            Console.WriteLine($"Viljarehun määrä (märkärehuna): {viljarehunMaaraMarka:F2} kg/pv");
+
+        if (onkoSoijarouhetta)
+            Console.WriteLine($"Soijarouheen määrä (märkärehuna): {soijarouheenMaaraMarka:F2} kg/pv");
+
+        if (onkoRypsirouhetta)
+            Console.WriteLine($"Rypsirouheen/tiivisteen määrä (märkärehuna): {rypsirouheenMaaraMarka:F2} kg/pv");
+
+        if (onkoRankkiaTaiMaskia)
+            Console.WriteLine($"Rankin/mäskin määrä (märkärehuna): {rankinTaiMaskinMaaraMarka:F2} kg/pv");
+
+        Console.WriteLine("\nPaina Enter sulkeaksesi ohjelman.");
+        Console.ReadLine();
+    }
+
+    // Kastroidun urossian ruokintasuunnitelma
+    static void KastroidunUrossianRuokintasuunnitelma()
+    {
+        // Ohjelma pyytää käyttäjältä kastroidun urossian elopainon
+        Console.Write("Syötä kastroidun urossian elopaino (kg): ");
+        double elopaino = double.Parse(Console.ReadLine());
+
+        // Ohjelma pyytää käyttäjältä kastroidun urossian päiväkasvutavoitteen
+        Console.Write("Syötä tavoitteellinen päiväkasvu (g/pv): ");
+        double kasvutavoite = double.Parse(Console.ReadLine()) / 1000.0; // Muutetaan kilogrammoiksi
+
+        // Ylläpidon ja kasvun energiantarve MJ/pv
+        double yllapitoEnergiantarve = 0.44 * elopaino;
+        // MJ/kasvu kg
+        double kasvunEnergiantarve = 13.0 * kasvutavoite;
+
+        double kokonaisEnergiantarve = yllapitoEnergiantarve + kasvunEnergiantarve;
+
+        // Ohjelma kysyy, onko käytössä viljarehua
+        Console.WriteLine("\nOnko käytössä viljarehua? (k/e)");
+        bool onkoViljarehua = Console.ReadLine().ToLower() == "k";
+
+        double viljarehuEnergia = 0, viljarehuKuivaAine = 0, viljarehuProsentti = 0;
+        // Jos on viljarehua
+        if (onkoViljarehua)
+        {
+            // Ohjelma pyytää syöttämään viljarehun energia-arvon
+            Console.Write("Syötä viljarehun energia-arvo (MJ/kg KA): ");
+            viljarehuEnergia = double.Parse(Console.ReadLine());
+
+            // Ohjelma pyytää syöttämään viljarehun kuiva-ainepitoisuuden
+            Console.Write("Syötä viljarehun kuiva-ainepitoisuus (%): ");
+            viljarehuKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            // Ohjelma pyytää syöttämään viljarehun osuuden ruokinnassa
+            Console.Write("Syötä viljarehun osuus (%) ruokinnassa: ");
+            viljarehuProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Syötetään soijarouheen tiedot
+        Console.WriteLine("\nOnko käytössä soijarouhetta? (k/e)");
+        bool onkoSoijarouhetta = Console.ReadLine().ToLower() == "k";
+
+        double soijarouheEnergia = 0, soijarouheKuivaAine = 0, soijarouheProsentti = 0;
+        if (onkoSoijarouhetta)
+        {
+            // Ohjelma pyytää syöttämään soijarouheen energia-arvon
+            Console.Write("Syötä soijarouheen energia-arvo (MJ/kg KA): ");
+            soijarouheEnergia = double.Parse(Console.ReadLine());
+
+            // Ohjelma pyytää syöttämään soijarouheen kuiva-ainepitoisuuden
+            Console.Write("Syötä soijarouheen kuiva-ainepitoisuus (%): ");
+            soijarouheKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            // Ohjelma pyytää syöttämään soijarouheen osuuden ruokinnassa
+            Console.Write("Syötä soijarouheen osuus (%) ruokinnassa: ");
+            soijarouheProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Syötetään rypsirouheen tiedot
+        Console.WriteLine("\nOnko käytössä rypsirouhetta/tiivistettä? (k/e)");
+        bool onkoRypsirouhetta = Console.ReadLine().ToLower() == "k";
+
+        double rypsirouheEnergia = 0, rypsirouheKuivaAine = 0, rypsirouheProsentti = 0;
+        if (onkoRypsirouhetta)
+        {
+            // Ohjelma pyytää syöttämään rypsirouheen energia-arvon
+            Console.Write("Syötä rypsirouheen energia-arvo (MJ/kg KA): ");
+            rypsirouheEnergia = double.Parse(Console.ReadLine());
+
+            // Ohjelma pyytää syöttämään rypsirouheen kuiva-ainepitoisuuden
+            Console.Write("Syötä rypsirouheen kuiva-ainepitoisuus (%): ");
+            rypsirouheKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            // Ohjelma pyytää syöttämään rypsirouheen osuuden ruokinnassa
+            Console.Write("Syötä rypsirouheen osuus (%) ruokinnassa: ");
+            rypsirouheProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Kysytään, onko käytössä rankkia/mäskiä, jos rypsirouhetta ei käytetä
+        bool onkoRankkia = false;
+        double rankkiEnergia = 0, rankkiKuivaAine = 0, rankkiProsentti = 0;
+
+        if (!onkoRypsirouhetta)
+        {
+            Console.WriteLine("\nOnko käytössä rankkia/mäskiä? (k/e)");
+            onkoRankkia = Console.ReadLine().ToLower() == "k";
+
+            // Jos on rankkia/mäskiä
+            if (onkoRankkia)
+            {
+                // Ohjelma pyytää syöttämään rankin/mäskin energia-arvon
+                Console.Write("Syötä rankin/mäskin energia-arvo (MJ/kg KA): ");
+                rankkiEnergia = double.Parse(Console.ReadLine());
+
+                // Ohjelma pyytää syöttämään rankin/mäskin kuiva-ainepitoisuuden
+                Console.Write("Syötä rankin/mäskin kuiva-ainepitoisuus (%): ");
+                rankkiKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+                // Ohjelma pyytää syöttämään rankin/mäskin osuuden ruokinnassa
+                Console.Write("Syötä rankin/mäskin osuus (%) ruokinnassa: ");
+                rankkiProsentti = double.Parse(Console.ReadLine()) / 100;
+            }
+        }
+
+        // Ohjelma laskee rehujen määrät energiantarpeen perusteella
+        double viljarehunMaaraMarka = 0, soijarouheenMaaraMarka = 0, rypsirouheenMaaraMarka = 0, rankinMaaraMarka = 0;
+
+        if (onkoViljarehua)
+        {
+            double viljarehunEnergiantarve = kokonaisEnergiantarve * viljarehuProsentti;
+            double viljarehunMaaraKA = viljarehunEnergiantarve / viljarehuEnergia;
+            viljarehunMaaraMarka = viljarehunMaaraKA / viljarehuKuivaAine;
+        }
+
+        if (onkoSoijarouhetta)
+        {
+            double soijarouheenEnergiantarve = kokonaisEnergiantarve * soijarouheProsentti;
+            double soijarouheenMaaraKA = soijarouheenEnergiantarve / soijarouheEnergia;
+            soijarouheenMaaraMarka = soijarouheenMaaraKA / soijarouheKuivaAine;
+        }
+
+        if (onkoRypsirouhetta)
+        {
+            double rypsirouheenEnergiantarve = kokonaisEnergiantarve * rypsirouheProsentti;
+            double rypsirouheenMaaraKA = rypsirouheenEnergiantarve / rypsirouheEnergia;
+            rypsirouheenMaaraMarka = rypsirouheenMaaraKA / rypsirouheKuivaAine;
+        }
+        else if (onkoRankkia)
+        {
+            double rankinEnergiantarve = kokonaisEnergiantarve * rankkiProsentti;
+            double rankinMaaraKA = rankinEnergiantarve / rankkiEnergia;
+            rankinMaaraMarka = rankinMaaraKA / rankkiKuivaAine;
+        }
+
+        // Ohjelma tulostaa kastroidun urossian ruokintasuunnitelman
+        Console.WriteLine("\nKastroidun urossian ruokintasuunnitelma:");
+        Console.WriteLine($"Kokonaisenergiantarve: {kokonaisEnergiantarve:F2} MJ/pv");
+
+        if (onkoViljarehua)
+            Console.WriteLine($"Viljarehun määrä (märkärehuna): {viljarehunMaaraMarka:F2} kg/pv");
+
+        if (onkoSoijarouhetta)
+            Console.WriteLine($"Soijarouheen määrä (märkärehuna): {soijarouheenMaaraMarka:F2} kg/pv");
+
+        if (onkoRypsirouhetta)
+            Console.WriteLine($"Rypsirouheen/tiivisteen määrä (märkärehuna): {rypsirouheenMaaraMarka:F2} kg/pv");
+
+        if (onkoRankkia)
+            Console.WriteLine($"Rankin/mäskin määrä (märkärehuna): {rankinMaaraMarka:F2} kg/pv");
+
+        Console.WriteLine("\nPaina Enter sulkeaksesi ohjelman.");
+        Console.ReadLine();
+    }
+
+    // Porsaan ruokintasuunnitelma
+    static void PorsaanRuokintasuunnitelma()
+    {
+        // Ohjelma pyytää käyttäjän syöttämään porsaan elopainon
+        Console.Write("Syötä porsaan elopaino (kg): ");
+        double elopaino = double.Parse(Console.ReadLine());
+
+        // Ohjelma laskee porsaan päivittäisen energian tarpeen arvolla 0,75 MJ/pv
+        double energiantarve = 0.75;
+
+        // Ohjelma kysyy onko käytössä viljarehua
+        Console.WriteLine("\nOnko käytössä viljarehua? (k/e)");
+        bool onkoViljarehua = Console.ReadLine().ToLower() == "k";
+
+        double viljarehuEnergia = 0, viljarehuKuivaAine = 0, viljarehuProsentti = 0;
+
+        // Jos on viljarehua
+        if (onkoViljarehua)
+        {
+            // Ohjelma pyytää syöttämään viljarehun energia-arvon
+            Console.Write("Syötä viljarehun energia-arvo (MJ/kg KA): ");
+            viljarehuEnergia = double.Parse(Console.ReadLine());
+
+            // Ohjelma pyytää syöttämään viljarehun kuiva-ainepitoisuuden
+            Console.Write("Syötä viljarehun kuiva-ainepitoisuus (%): ");
+            viljarehuKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            // Ohjelma pyytää syöttämään viljarehun osuuden ruokinnassa
+            Console.Write("Syötä viljarehun osuus (%) ruokinnassa: ");
+            viljarehuProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Ohjelma kysyy, onko käytössä soijarouhetta
+        Console.WriteLine("\nOnko käytössä soijarouhetta? (k/e)");
+        bool onkoSoijarouhetta = Console.ReadLine().ToLower() == "k";
+
+        double soijarouheEnergia = 0, soijarouheKuivaAine = 0, soijarouheProsentti = 0;
+
+        // Jos on soijarouhetta
+        if (onkoSoijarouhetta)
+        {
+            // Ohjelma pyytää syöttämään soijarouheen energia-arvon
+            Console.Write("Syötä soijarouheen energia-arvo (MJ/kg KA): ");
+            soijarouheEnergia = double.Parse(Console.ReadLine());
+
+            // Ohjelma pyytää syöttämään soijarouheen kuiva-ainepitoisuuden
+            Console.Write("Syötä soijarouheen kuiva-ainepitoisuus (%): ");
+            soijarouheKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            // Ohjelma pyytää syöttämään soijarouheen osuuden ruokinnassa
+            Console.Write("Syötä soijarouheen osuus (%) ruokinnassa: ");
+            soijarouheProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Ohjelma kysyy, onko käytössä rypsirouhetta/-tiivistettä
+        Console.WriteLine("\nOnko käytössä rypsirouhetta/-tiivistettä? (k/e)");
+        bool onkoRypsirouhettaTaiTiivistetta = Console.ReadLine().ToLower() == "k";
+
+        double rypsirouheTaiTiivisteEnergia = 0, rypsirouheTaiTiivisteKuivaAine = 0, rypsirouheTaiTiivisteProsentti = 0;
+
+        // Jos on rypsirouhetta
+        if (onkoRypsirouhettaTaiTiivistetta)
+        {
+            // Ohjelma pyytää syöttämään rypsirouheen/-tiivisteen energia-arvon
+            Console.Write("Syötä rypsirouheen/-tiivisteen energia-arvo (MJ/kg KA): ");
+            rypsirouheTaiTiivisteEnergia = double.Parse(Console.ReadLine());
+
+            // Ohjelma pyytää syöttämään rypsirouheen/-tiivisteen kuiva-ainepitoisuuden
+            Console.Write("Syötä rypsirouheen/-tiivisteen kuiva-ainepitoisuus (%): ");
+            rypsirouheTaiTiivisteKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            // Ohjelma pyytää syöttämään rypsirouheen/-tiivisteen osuuden ruokinnassa
+            Console.Write("Syötä rypsirouheen/-tiivisteen osuus (%) ruokinnassa: ");
+            rypsirouheTaiTiivisteProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Ohjelma kysyy, onko käytössä rankkia/mäskiä, jos rypsirouhetta/-tiivistettä ei käytetä
+        bool onkoRankkiaTaiMaskia = false;
+        double rankkiTaiMaskiEnergia = 0, rankkiTaiMaskiKuivaAine = 0, rankkiTaiMaskiProsentti = 0;
+
+        if (!onkoRypsirouhettaTaiTiivistetta)
+        {
+            // Ohjelma kysyy, onko käytössä rankkia tai mäskiä
+            Console.WriteLine("\nOnko käytössä rankkia/mäskiä? (k/e)");
+            onkoRankkiaTaiMaskia = Console.ReadLine().ToLower() == "k";
+
+            // Jos on rankkia/mäskiä
+            if (onkoRankkiaTaiMaskia)
+            {
+                // Ohjelma pyytää syöttämään rankin/mäskin energia-arvo
+                Console.Write("Syötä rankin/mäskin energia-arvo (MJ/kg KA): ");
+                rankkiTaiMaskiEnergia = double.Parse(Console.ReadLine());
+
+                // Ohjelma pyytää syöttämään rankin/mäskin kuiva-ainepitoisuuden
+                Console.Write("Syötä rankin/mäskin kuiva-ainepitoisuus (%): ");
+                rankkiTaiMaskiKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+                // Ohjelma pyytää syöttämään rankin/mäskin osuuden ruokinnassa
+                Console.Write("Syötä rankin/mäskin osuus (%) ruokinnassa: ");
+                rankkiTaiMaskiProsentti = double.Parse(Console.ReadLine()) / 100;
+            }
+        }
+
+        // Ohjelma laskee rehujen määrät
+        double viljarehunMaaraMarka = 0, soijarouheenMaaraMarka = 0, rypsirouheenMaaraMarka = 0, rankinMaaraMarka = 0;
+
+        double kokonaisEnergiantarve = energiantarve;
+
+        if (onkoViljarehua)
+        {
+            double viljarehunEnergiantarve = kokonaisEnergiantarve * viljarehuProsentti;
+            double viljarehunMaaraKA = viljarehunEnergiantarve / viljarehuEnergia;
+            viljarehunMaaraMarka = viljarehunMaaraKA / viljarehuKuivaAine;
+        }
+
+        if (onkoSoijarouhetta)
+        {
+            double soijarouheenEnergiantarve = kokonaisEnergiantarve * soijarouheProsentti;
+            double soijarouheenMaaraKA = soijarouheenEnergiantarve / soijarouheEnergia;
+            soijarouheenMaaraMarka = soijarouheenMaaraKA / soijarouheKuivaAine;
+        }
+
+        if (onkoRypsirouhettaTaiTiivistetta)
+        {
+            double rypsirouheenEnergiantarve = kokonaisEnergiantarve * rypsirouheTaiTiivisteProsentti;
+            double rypsirouheenMaaraKA = rypsirouheenEnergiantarve / rypsirouheTaiTiivisteEnergia;
+            rypsirouheenMaaraMarka = rypsirouheenMaaraKA / rypsirouheTaiTiivisteKuivaAine;
+        }
+        else if (onkoRankkiaTaiMaskia)
+        {
+            double rankinEnergiantarve = kokonaisEnergiantarve * rankkiTaiMaskiProsentti;
+            double rankinMaaraKA = rankinEnergiantarve / rankkiTaiMaskiEnergia;
+            rankinMaaraMarka = rankinMaaraKA / rankkiTaiMaskiKuivaAine;
+        }
+
+        // Ohjelma tulostaa porsaan ruokintasuunnitelman
+        Console.WriteLine("\nPorsaan ruokintasuunnitelma:");
+        Console.WriteLine($"Porsaan energian tarve: {kokonaisEnergiantarve:F2} MJ/pv");
+
+        if (onkoViljarehua)
+            Console.WriteLine($"Viljan määrä (märkärehuna): {viljarehunMaaraMarka:F2} kg/pv");
+
+        if (onkoSoijarouhetta)
+            Console.WriteLine($"Soijarouheen määrä (märkärehuna): {soijarouheenMaaraMarka:F2} kg/pv");
+
+        if (onkoRypsirouhettaTaiTiivistetta)
+            Console.WriteLine($"Rypsirouheen/tiivisteen määrä (märkärehuna): {rypsirouheenMaaraMarka:F2} kg/pv");
+
+        if (onkoRankkiaTaiMaskia)
+            Console.WriteLine($"Rankin/mäskin määrä (märkärehuna): {rankinMaaraMarka:F2} kg/pv");
+
+        Console.WriteLine("\nPaina Enter sulkeaksesi ohjelman.");
+        Console.ReadLine();
+    }
+
+    // Siipikarjan ruokintasuunnitelmat
+
+    // Kanan ruokintasuunnitelma
+    static void KananRuokintasuunnitelma()
+    {
+        // Ohjelma pyytää syöttämään kanan painon
+        Console.Write("Syötä kanan paino (kg): ");
+        double paino = double.Parse(Console.ReadLine());
+
+        // Ohjelma kysyy, muniiko kana
+        Console.WriteLine("Muniiko kana? (k/e): ");
+        bool muniikoKana = Console.ReadLine().ToLower() == "k";
+
+        // Ylläpitoenergian vakio ei-munivalle kanalle MJ/pv/kg
+        double yllapitoEnergiaPerKg = 0.25;
+        // Lisäenergian vakio munivalle kanalle MJ/pv/kg
+        double munimisEnergiaLisays = 0.10;
+
+        double energiantarveYllapito = yllapitoEnergiaPerKg * paino;
+        double munimisEnergiantarve = 0;
+
+        if (muniikoKana)
+        {
+            // Jos kana munii, lisätään munimisenergiantarve
+            munimisEnergiantarve = munimisEnergiaLisays * paino;
+        }
+
+        // Kokonaisenergiantarve päivässä (MJ/pv)
+        double kokonaisEnergiantarve = energiantarveYllapito + munimisEnergiantarve;
+
+        // Ohjelma kysyy, onko käytössä viljarehua
+        Console.Write("Onko ruokinnassa käytössä viljarehua? (k/e): ");
+        bool onkoViljarehua = Console.ReadLine().ToLower() == "k";
+
+        double viljarehuEnergia = 0;
+        double viljarehuKuivaAine = 0;
+        double viljarehuProsentti = 0;
+
+        if (onkoViljarehua)
+        {
+            // Ohjelma pyytää syöttämään viljarehun energia-arvon
+            Console.Write("Syötä viljarehun energia-arvo (MJ/kg KA): ");
+            viljarehuEnergia = double.Parse(Console.ReadLine());
+
+            // Ohjelma pyytää syöttämään viljarehun kuiva-ainepitoisuuden
+            Console.Write("Syötä viljarehun kuiva-ainepitoisuus (%): ");
+            viljarehuKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            // Ohjelma pyytää syöttämään viljarehun osuuden ruokinnassa
+            Console.Write("Syötä viljarehun osuus ruokinnassa (%): ");
+            viljarehuProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Ohjelma kysyy, onko käytössä valkuaisrehua (esim. soijarouhetta)
+        Console.Write("Onko ruokinnassa käytössä valkuaisrehua (esim. soijarouhetta, rypsirouhetta)? (k/e): ");
+        bool onkoValkuaisrehua = Console.ReadLine().ToLower() == "k";
+
+        double valkuaisrehuEnergia = 0;
+        double valkuaisrehuKuivaAine = 0;
+        double valkuaisrehuProsentti = 0;
+
+        if (onkoValkuaisrehua)
+        {
+            // Ohjelma pyytää syöttämään valkuaisrehun energia-arvon
+            Console.Write("Syötä valkuaisrehun energia-arvo (MJ/kg KA): ");
+            valkuaisrehuEnergia = double.Parse(Console.ReadLine());
+
+            // Ohjelma pyytää syöttämään valkuaisrehun kuiva-ainepitoisuuden
+            Console.Write("Syötä valkuaisrehun kuiva-ainepitoisuus (%): ");
+            valkuaisrehuKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            // Ohjelma pyytää syöttämään valkuaisrehun osuuden ruokinnassa
+            Console.Write("Syötä valkuaisrehun osuus ruokinnassa (%): ");
+            valkuaisrehuProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Ohjelma laskee viljan ja valkuaisrehun määrän (kg märkärehuna)
+        double viljarehuMaaraMarka = 0, valkuaisrehuMaaraMarka = 0;
+
+        if (onkoViljarehua)
+        {
+            double viljarehuEnergiantarve = kokonaisEnergiantarve * viljarehuProsentti;
+            double viljarehuMaaraKA = viljarehuEnergiantarve / viljarehuEnergia;
+            viljarehuMaaraMarka = viljarehuMaaraKA / viljarehuKuivaAine;
+        }
+
+        if (onkoValkuaisrehua)
+        {
+            double valkuaisrehuEnergiantarve = kokonaisEnergiantarve * valkuaisrehuProsentti;
+            double valkuaisrehuMaaraKA = valkuaisrehuEnergiantarve / valkuaisrehuEnergia;
+            valkuaisrehuMaaraMarka = valkuaisrehuMaaraKA / valkuaisrehuKuivaAine;
+        }
+
+        // Ohjelma tulostaa kanan ruokintasuunnitelman
+        Console.WriteLine("\nKanan ruokintasuunnitelma:");
+        Console.WriteLine($"Kokonaisenergiantarve: {kokonaisEnergiantarve:F2} MJ/pv");
+
+        if (onkoViljarehua)
+        {
+            Console.WriteLine($"Viljan määrä (märkärehuna): {viljarehuMaaraMarka:F2} kg/pv");
+        }
+        else
+        {
+            Console.WriteLine("Ei viljarehua ruokinnassa.");
+        }
+
+        if (onkoValkuaisrehua)
+        {
+            Console.WriteLine($"Valkuaisrehun määrä (märkärehuna): {valkuaisrehuMaaraMarka:F2} kg/pv");
+        }
+        else
+        {
+            Console.WriteLine("Ei valkuaisrehua ruokinnassa.");
+        }
+
+        Console.WriteLine("\nPaina Enter sulkeaksesi ohjelman.");
+        Console.ReadLine();
+    }
+
+    // Kukon ruokintasuunnitelma
+    static void KukonRuokintasuunnitelma()
+    {
+        // Ohjelma pyytää syöttämään kukon painon
+        Console.Write("Syötä kukon paino (kg): ");
+        double paino = double.Parse(Console.ReadLine());
+
+        // Ohjelma kysyy, onko kukko siitoskäytössä
+        Console.WriteLine("Onko kukko siitoskäytössä? (k/e): ");
+        bool onkoSiitoskaytossa = Console.ReadLine().ToLower() == "k";
+
+        // Ylläpitoenergian vakio ei-siitoskukolle MJ/pv/kg
+        double yllapitoEnergiaPerKg = 0.25;
+        // Lisäenergian vakio siitoskukon energiatarpeelle MJ/pv/kg
+        double siitosEnergiaLisays = 0.10;
+
+        double energiantarveYllapito = yllapitoEnergiaPerKg * paino;
+        double siitosEnergiantarve = 0;
+
+        if (onkoSiitoskaytossa)
+        {
+            // Jos kukko on siitoskäytössä, lisätään siitoskauden energiantarve
+            siitosEnergiantarve = siitosEnergiaLisays * paino;
+        }
+
+        // Kokonaisenergiantarve päivässä (MJ/pv)
+        double kokonaisEnergiantarve = energiantarveYllapito + siitosEnergiantarve;
+
+        // Ohjelma kysyy, onko käytössä viljarehua
+        Console.Write("Onko ruokinnassa käytössä viljarehua? (k/e): ");
+        bool onkoViljarehua = Console.ReadLine().ToLower() == "k";
+
+        double viljarehuEnergia = 0;
+        double viljarehuKuivaAine = 0;
+        double viljarehuProsentti = 0;
+
+        if (onkoViljarehua)
+        {
+            // Ohjelma pyytää syöttämään viljarehun energia-arvon
+            Console.Write("Syötä viljarehun energia-arvo (MJ/kg KA): ");
+            viljarehuEnergia = double.Parse(Console.ReadLine());
+
+            // Ohjelma pyytää syöttämään viljarehun kuiva-ainepitoisuuden
+            Console.Write("Syötä viljarehun kuiva-ainepitoisuus (%): ");
+            viljarehuKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            // Ohjelma pyytää syöttämään viljarehun osuuden ruokinnassa
+            Console.Write("Syötä viljarehun osuus ruokinnassa (%): ");
+            viljarehuProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Ohjelma kysyy, onko käytössä valkuaisrehua (esim. soijarouhetta)
+        Console.Write("Onko ruokinnassa käytössä valkuaisrehua (esim. soijarouhetta, rypsirouhetta)? (k/e): ");
+        bool onkoValkuaisrehua = Console.ReadLine().ToLower() == "k";
+
+        double valkuaisrehuEnergia = 0;
+        double valkuaisrehuKuivaAine = 0;
+        double valkuaisrehuProsentti = 0;
+
+        if (onkoValkuaisrehua)
+        {
+            // Ohjelma pyytää syöttämään valkuaisrehun energia-arvon
+            Console.Write("Syötä valkuaisrehun energia-arvo (MJ/kg KA): ");
+            valkuaisrehuEnergia = double.Parse(Console.ReadLine());
+
+            // Ohjelma pyytää syöttämään valkuaisrehun kuiva-ainepitoisuuden
+            Console.Write("Syötä valkuaisrehun kuiva-ainepitoisuus (%): ");
+            valkuaisrehuKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            // Ohjelma pyytää syöttämään valkuaisrehun osuuden ruokinnassa
+            Console.Write("Syötä valkuaisrehun osuus ruokinnassa (%): ");
+            valkuaisrehuProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Ohjelma laskee viljan ja valkuaisrehun määrän (kg märkärehuna)
+        double viljarehuMaaraMarka = 0, valkuaisrehuMaaraMarka = 0;
+
+        if (onkoViljarehua)
+        {
+            double viljarehuEnergiantarve = kokonaisEnergiantarve * viljarehuProsentti;
+            double viljarehuMaaraKA = viljarehuEnergiantarve / viljarehuEnergia;
+            viljarehuMaaraMarka = viljarehuMaaraKA / viljarehuKuivaAine;
+        }
+
+        if (onkoValkuaisrehua)
+        {
+            double valkuaisrehuEnergiantarve = kokonaisEnergiantarve * valkuaisrehuProsentti;
+            double valkuaisrehuMaaraKA = valkuaisrehuEnergiantarve / valkuaisrehuEnergia;
+            valkuaisrehuMaaraMarka = valkuaisrehuMaaraKA / valkuaisrehuKuivaAine;
+        }
+
+        // Ohjelma tulostaa kukon ruokintasuunnitelman
+        Console.WriteLine("\nKukon ruokintasuunnitelma:");
+        Console.WriteLine($"Kokonaisenergiantarve: {kokonaisEnergiantarve:F2} MJ/pv");
+
+        if (onkoViljarehua)
+        {
+            Console.WriteLine($"Viljan määrä (märkärehuna): {viljarehuMaaraMarka:F2} kg/pv");
+        }
+        else
+        {
+            Console.WriteLine("Ei viljarehua ruokinnassa.");
+        }
+
+        if (onkoValkuaisrehua)
+        {
+            Console.WriteLine($"Valkuaisrehun määrä (märkärehuna): {valkuaisrehuMaaraMarka:F2} kg/pv");
+        }
+        else
+        {
+            Console.WriteLine("Ei valkuaisrehua ruokinnassa.");
+        }
+
+        Console.WriteLine("\nPaina Enter sulkeaksesi ohjelman.");
+        Console.ReadLine();
+    }
+
+    // Poikasen ruokintasuunnitelma
+    static void PoikasenRuokintasuunnitelma()
+    {
+        // Ohjelma pyytää syöttämään poikasen iän
+        Console.Write("Syötä poikasen ikä (päivinä): ");
+        int ikaPaivina = int.Parse(Console.ReadLine());
+
+        // Ylläpitoenergian vakio poikaselle MJ/pv/kg
+        double yllapitoEnergiaPerKg = 0.15;
+        // Kasvavan poikasen lisäenergiantarve MJ/pv/kg
+        double kasvunEnergiaLisays = 0.05;
+
+        // Ohjelma pyytää syöttämään poikasen painon
+        Console.Write("Syötä poikasen paino (kg): ");
+        double paino = double.Parse(Console.ReadLine());
+
+        // Lasketaan poikasen energiantarve
+        double energiantarveYllapito = yllapitoEnergiaPerKg * paino;
+        double kasvunEnergiantarve = kasvunEnergiaLisays * paino;
+        double kokonaisEnergiantarve = energiantarveYllapito + kasvunEnergiantarve;
+
+        // Ohjelma kysyy, onko käytössä viljarehua
+        Console.Write("Onko ruokinnassa käytössä viljarehua? (k/e): ");
+        bool onkoViljarehua = Console.ReadLine().ToLower() == "k";
+
+        double viljarehuEnergia = 0;
+        double viljarehuKuivaAine = 0;
+        double viljarehuProsentti = 0;
+
+        if (onkoViljarehua)
+        {
+            // Ohjelma pyytää syöttämään viljarehun energia-arvon
+            Console.Write("Syötä viljarehun energia-arvo (MJ/kg KA): ");
+            viljarehuEnergia = double.Parse(Console.ReadLine());
+
+            // Ohjelma pyytää syöttämään viljarehun kuiva-ainepitoisuuden
+            Console.Write("Syötä viljarehun kuiva-ainepitoisuus (%): ");
+            viljarehuKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            // Ohjelma pyytää syöttämään viljarehun osuuden ruokinnassa
+            Console.Write("Syötä viljarehun osuus ruokinnassa (%): ");
+            viljarehuProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Ohjelma kysyy, onko käytössä valkuaisrehua (esim. soijarouhetta)
+        Console.Write("Onko ruokinnassa käytössä valkuaisrehua (esim. soijarouhetta, rypsirouhetta)? (k/e): ");
+        bool onkoValkuaisrehua = Console.ReadLine().ToLower() == "k";
+
+        double valkuaisrehuEnergia = 0;
+        double valkuaisrehuKuivaAine = 0;
+        double valkuaisrehuProsentti = 0;
+
+        if (onkoValkuaisrehua)
+        {
+            // Ohjelma pyytää syöttämään valkuaisrehun energia-arvon
+            Console.Write("Syötä valkuaisrehun energia-arvo (MJ/kg KA): ");
+            valkuaisrehuEnergia = double.Parse(Console.ReadLine());
+
+            // Ohjelma pyytää syöttämään valkuaisrehun kuiva-ainepitoisuuden
+            Console.Write("Syötä valkuaisrehun kuiva-ainepitoisuus (%): ");
+            valkuaisrehuKuivaAine = double.Parse(Console.ReadLine()) / 100;
+
+            // Ohjelma pyytää syöttämään valkuaisrehun osuuden ruokinnassa
+            Console.Write("Syötä valkuaisrehun osuus ruokinnassa (%): ");
+            valkuaisrehuProsentti = double.Parse(Console.ReadLine()) / 100;
+        }
+
+        // Ohjelma laskee viljan ja valkuaisrehun määrän (kg märkärehuna)
+        double viljarehuMaaraMarka = 0, valkuaisrehuMaaraMarka = 0;
+
+        if (onkoViljarehua)
+        {
+            double viljarehuEnergiantarve = kokonaisEnergiantarve * viljarehuProsentti;
+            double viljarehuMaaraKA = viljarehuEnergiantarve / viljarehuEnergia;
+            viljarehuMaaraMarka = viljarehuMaaraKA / viljarehuKuivaAine;
+        }
+
+        if (onkoValkuaisrehua)
+        {
+            double valkuaisrehuEnergiantarve = kokonaisEnergiantarve * valkuaisrehuProsentti;
+            double valkuaisrehuMaaraKA = valkuaisrehuEnergiantarve / valkuaisrehuEnergia;
+            valkuaisrehuMaaraMarka = valkuaisrehuMaaraKA / valkuaisrehuKuivaAine;
+        }
+
+        // Ohjelma tulostaa poikasen ruokintasuunnitelman
+        Console.WriteLine("\nPoikasen ruokintasuunnitelma:");
+        Console.WriteLine($"Kokonaisenergiantarve: {kokonaisEnergiantarve:F2} MJ/pv");
+
+        if (onkoViljarehua)
+        {
+            Console.WriteLine($"Viljarehun määrä (märkärehuna): {viljarehuMaaraMarka:F2} kg/pv");
+        }
+        else
+        {
+            Console.WriteLine("Ei viljarehua ruokinnassa.");
+        }
+
+        if (onkoValkuaisrehua)
+        {
+            Console.WriteLine($"Valkuaisrehun määrä (märkärehuna): {valkuaisrehuMaaraMarka:F2} kg/pv");
+        }
+        else
+        {
+            Console.WriteLine("Ei valkuaisrehua ruokinnassa.");
+        }
+
+        Console.WriteLine("\nPaina Enter sulkeaksesi ohjelman.");
+        Console.ReadLine();
+    }
+}
